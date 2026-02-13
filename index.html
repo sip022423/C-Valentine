@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ff7fb3" />
+  <title>Valentine Date Night</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#app">Skip to content</a>
+
+  <div class="music-dock" role="region" aria-label="Background music controls">
+    <button id="musicToggle" class="music-btn" type="button" aria-pressed="false" aria-label="Play music">
+      🔊 <span class="music-btn__text">Play Music</span>
+    </button>
+
+    <label class="music-vol" for="musicVolume">
+      <span class="music-vol__label" aria-hidden="true">Vol</span>
+      <input id="musicVolume" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Music volume" />
+    </label>
+  </div>
+
+  <div class="bg-hearts" aria-hidden="true">
+    <span class="heart h1"></span>
+    <span class="heart h2"></span>
+    <span class="heart h3"></span>
+    <span class="heart h4"></span>
+    <span class="heart h5"></span>
+    <span class="heart h6"></span>
+  </div>
+
+  <main id="app" class="app" data-page="1">
+    <section id="page1" class="page page--active" aria-labelledby="p1-title">
+      <div class="card hero-card">
+        <p class="eyebrow">Date night proposal</p>
+
+        <h1 id="p1-title" class="romantic-title">
+          Will you be my Valentine, <span id="valentineName">my love</span>?
+        </h1>
+
+        <figure class="gif-wrap" aria-label="Cute valentine gif">
+          <img id="valentineGif"
+               class="gif"
+               src="assets/happy-cat.gif"
+               alt="A cute Valentine gif"
+               loading="eager"
+               decoding="async" />
+          <figcaption class="muted">A tiny reminder: you + me = perfect 💞</figcaption>
+        </figure>
+
+        <p id="noHint" class="romantic-hint" role="status" aria-live="polite"></p>
+
+        <div class="btn-row" role="group" aria-label="Valentine response buttons">
+          <button id="yesBtn" class="btn btn--primary" type="button" aria-label="Yes">
+            Yes 💖
+          </button>
+          <button id="noBtn" class="btn btn--ghost" type="button" aria-label="No">
+            No 🙈
+          </button>
+        </div>
+      </div>
+
+      <div id="fxLayer" class="fx-layer" aria-hidden="true"></div>
+    </section>
+
+    <section id="page2" class="page" aria-labelledby="p2-title">
+      <header class="page-header">
+        <h2 id="p2-title" class="page-title">Let’s plan our date 💗</h2>
+        <p class="page-subtitle">Just a few cute details… and we’re set.</p>
+      </header>
+
+      <form id="plannerForm" class="planner" novalidate aria-describedby="plannerErrors">
+        <input type="hidden" name="source" value="Valentine Web Experience" />
+        <input type="hidden" id="planPayload" name="planPayload" value="" />
+
+        <p id="plannerErrors" class="sr-only" aria-live="polite"></p>
+
+        <div class="cards">
+          <article class="plan-card" aria-labelledby="loc-title">
+            <div class="plan-card__icon" aria-hidden="true">📍</div>
+            <h3 id="loc-title" class="plan-card__title">Location</h3>
+
+            <label class="field">
+              <span class="field__label">Choose a spot <span class="req" aria-hidden="true">*</span></span>
+              <select id="locationSelect" name="locationSelect" class="input" required aria-required="true" aria-label="Choose location">
+                <option value="" selected disabled>Select a location…</option>
+                <option value="Cozy restaurant">Restaurant</option>
+                <option value="Cinema date">Cinema date</option>
+                <option value="Coffee shop">Coffee shop</option>
+                <option value="Picnic">Picnic</option>
+                <option value="Sunset walk">Sunset walk</option>
+                <option value="Sunset walk">Bahay</option>
+                <option value="Custom">Custom…</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Custom location (optional)</span>
+              <input id="customLocation" name="customLocation" class="input" type="text" inputmode="text" autocomplete="off"
+                     placeholder="Type a place name…" aria-label="Custom location" />
+              <span class="field__help">If you picked “Custom…”, this becomes your location.</span>
+            </label>
+          </article>
+
+          <article class="plan-card" aria-labelledby="td-title">
+            <div class="plan-card__icon" aria-hidden="true">🕒</div>
+            <h3 id="td-title" class="plan-card__title">Time &amp; Date</h3>
+
+            <label class="field">
+              <span class="field__label">Date <span class="req" aria-hidden="true">*</span></span>
+              <input id="dateInput" name="dateInput" class="input" type="date" required aria-required="true" aria-label="Select date" />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Time (optional)</span>
+              <input id="timeInput" name="timeInput" class="input" type="time" aria-label="Select time" />
+            </label>
+
+            <p class="note">Tip: pick a date first — we’ll handle the rest 💕</p>
+          </article>
+
+          <article class="plan-card" aria-labelledby="ex-title">
+            <div class="plan-card__icon" aria-hidden="true">✨</div>
+            <h3 id="ex-title" class="plan-card__title">Extras</h3>
+
+            <fieldset class="checks">
+              <legend class="sr-only">Extras checklist</legend>
+
+              <label class="check">
+                <input type="checkbox" name="extras" value="Dinner" />
+                <span>Dinner</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="extras" value="Movie" />
+                <span>Movie</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="extras" value="Coffee" />
+                <span>Coffee</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="extras" value="Walk" />
+                <span>Walk</span>
+              </label>
+            </fieldset>
+
+            <label class="field">
+              <span class="field__label">Notes (optional)</span>
+              <textarea id="notesInput" name="notesInput" class="input input--textarea" rows="4"
+                        placeholder="Anything special you want? 🌸" aria-label="Extra notes"></textarea>
+            </label>
+          </article>
+        </div>
+
+        <div class="actions">
+          <button id="continueBtn" class="btn btn--primary btn--wide" type="submit">
+            Continue 💞
+          </button>
+          <button id="backToP1" class="btn btn--ghost btn--wide" type="button">
+            Back
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section id="page3" class="page" aria-labelledby="p3-title">
+      <header class="page-header">
+        <h2 id="p3-title" class="romantic-title">Yay… it’s a date 💖</h2>
+        <p id="summaryLine" class="romantic-message" aria-live="polite"></p>
+      </header>
+
+      <section id="p3Hub" class="hub" aria-label="Choose a category">
+        <div class="hub-grid">
+          <!-- ✅ BOUQUET CARD: VIDEO PREVIEW (no image) -->
+          <button id="openBouquet" class="hub-card" type="button" aria-label="Open bouquet video">
+            <video class="hub-card__video" autoplay muted loop playsinline preload="metadata">
+              <source src="assets/bouquet.mp4" type="video/mp4" />
+            </video>
+            <div class="hub-card__title">Bouquet</div>
+            <div class="hub-card__sub">Just a bouquet video 🌸</div>
+          </button>
+
+          <button id="openMessage" class="hub-card" type="button" aria-label="Open message envelope">
+            <img src="assets/envelope_btn.png" alt="Envelope button" class="hub-card__img">
+            <div class="hub-card__title">Envelope</div>
+            <div class="hub-card__sub">A lil note for you 💌</div>
+          </button>
+        </div>
+
+        <div class="actions">
+          <button id="restartBtn" class="btn btn--ghost btn--wide" type="button">Restart ↺</button>
+          <button id="backToP2" class="btn btn--ghost btn--wide" type="button">Back</button>
+        </div>
+      </section>
+
+      <!-- ✅ BOUQUET VIEW: VIDEO ONLY, FULL WIDTH (SHOW ALL) -->
+      <section id="p3Bouquet" class="subpage" hidden aria-label="Bouquet view">
+        <div class="subpage-head">
+          <button class="btn btn--ghost" id="backToHubFromBouquet" type="button">← Back</button>
+          <h3 class="gallery-title">Bouquet Video 🌸</h3>
+        </div>
+
+        <div class="bouquet-video-wrap">
+          <video id="bouquetVideo" class="bouquet-video" controls playsinline preload="metadata">
+            <source src="assets/vid.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <p class="romantic-message">For you — with all my softest feelings 🌷</p>
+        </div>
+      </section>
+
+      <section id="p3Message" class="subpage" hidden aria-label="Message view">
+        <div class="subpage-head">
+          <button class="btn btn--ghost" id="backToHubFromMessage" type="button">← Back</button>
+          <h3 class="gallery-title">My Message 💌</h3>
+        </div>
+
+        <article class="message-card">
+          <p class="muted">No saving, no typing — just a note from me to you ✨</p>
+
+          <div class="message-preview">
+            <h4 class="message-preview__title">For you</h4>
+            <div id="loveMessagePreview" class="message-preview__box"></div>
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <audio id="bgMusic" preload="auto" loop aria-label="Background music">
+    <source id="musicSource" src="assets/Laufey - Valentine.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
